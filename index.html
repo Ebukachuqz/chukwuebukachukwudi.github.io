@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chukwuebuka Chukwudi — Portfolio Design v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#F5F1EB;
+  --white:#FFFFFF;
+  --ink:#111111;
+  --muted:#8A847C;
+  --border:#DDD7CC;
+  --ember:#FF6B1A;
+  --teal:#00C4A0;
+  --gold:#F5C518;
+  --surface:#EDEAE3;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+.lbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#B5ADA0;display:block;}
+hr{border:none;border-top:1px solid var(--border);}
+
+/* ── NAV ── */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 56px;background:var(--cream);border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--ink);}
+.logo span{color:var(--ember);}
+.nav-links{display:flex;gap:36px;}
+.nav-links a{font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{
+  background:var(--ink);color:var(--cream);font-size:10px;font-weight:600;
+  letter-spacing:2.5px;text-transform:uppercase;padding:11px 24px;border-radius:1px;text-decoration:none;
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--ember);}
+
+/* ── HERO ── */
+.hero{
+  position:relative;overflow:hidden;
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:80px 56px 60px;
+  background:var(--cream);
+}
+/* Subtle grain texture */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:0.4;pointer-events:none;
+}
+/* Workshop photo — right side behind content */
+.hero-bg-photo{
+  position:absolute;right:0;top:0;bottom:0;width:52%;
+  background:linear-gradient(135deg,#B8D0CA 0%,#8DB8B0 40%,#6AA8A0 100%);
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-bg-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.hero-photo-placeholder{text-align:center;color:rgba(255,255,255,0.45);}
+.hero-photo-placeholder .icon{font-size:36px;margin-bottom:10px;}
+.hero-photo-placeholder .text{font-size:10px;letter-spacing:3px;text-transform:uppercase;}
+/* Fade: right photo fades into cream on left */
+.hero-photo-fade{
+  position:absolute;right:0;top:0;bottom:0;width:52%;
+  background:linear-gradient(to right,
+    var(--cream) 0%,
+    rgba(245,241,235,0.9) 20%,
+    rgba(245,241,235,0.5) 50%,
+    rgba(245,241,235,0.1) 75%,
+    transparent 100%
+  );
+  pointer-events:none;
+}
+.hero-content{
+  position:relative;z-index:2;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+  width:100%;max-width:900px;
+}
+
+/* Brand line — teal bordered pill */
+.brand-pill{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1.5px solid var(--teal);border-radius:2px;
+  padding:9px 22px;
+  font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  color:var(--teal);
+  text-shadow:0 0 18px rgba(0,196,160,0.5);
+  box-shadow:0 0 20px rgba(0,196,160,0.1),inset 0 0 20px rgba(0,196,160,0.04);
+  margin-bottom:36px;
+}
+.brand-pill em{color:var(--ember);font-style:normal;text-shadow:0 0 18px rgba(255,107,26,0.5);}
+
+/* THE BIG TYPE */
+.hero-name{
+  font-family:'Bebas Neue',sans-serif;
+  line-height:0.88;
+  letter-spacing:-1px;
+  margin-bottom:24px;
+  user-select:none;
+}
+.name-outline{
+  display:block;
+  font-size:clamp(72px,12vw,148px);
+  color:transparent;
+  -webkit-text-stroke:2px var(--ink);
+  letter-spacing:4px;
+}
+.name-solid{
+  display:block;
+  font-size:clamp(72px,12vw,148px);
+  color:var(--ember);
+  letter-spacing:4px;
+  text-shadow:0 0 40px rgba(255,107,26,0.2);
+}
+
+/* Subtitle */
+.hero-subtitle{
+  font-size:11px;letter-spacing:2.5px;color:var(--muted);
+  text-transform:uppercase;margin-bottom:28px;line-height:2;
+}
+.hero-subtitle strong{
+  color:var(--teal);font-weight:500;
+  text-shadow:0 0 14px rgba(0,196,160,0.4);
+}
+
+/* Social icons row */
+.hero-socials{display:flex;gap:12px;align-items:center;margin-bottom:36px;}
+.h-soc{
+  width:40px;height:40px;border-radius:50%;
+  border:1.5px solid var(--border);background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:14px;text-decoration:none;
+  transition:all .2s;
+}
+.h-soc:hover{border-color:var(--ember);color:var(--ember);box-shadow:0 0 12px rgba(255,107,26,0.2);}
+.h-soc.teal:hover{border-color:var(--teal);color:var(--teal);box-shadow:0 0 12px rgba(0,196,160,0.2);}
+
+/* CTA */
+.hero-actions{display:flex;gap:14px;}
+.btn-p{
+  background:var(--ember);color:#fff;font-size:11px;font-weight:600;
+  letter-spacing:2.5px;text-transform:uppercase;padding:15px 34px;
+  border-radius:1px;border:none;cursor:pointer;
+  box-shadow:0 6px 24px rgba(255,107,26,0.3);
+  transition:transform .15s,box-shadow .15s;
+}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(255,107,26,0.4);}
+.btn-g{
+  background:transparent;color:var(--ink);font-size:11px;font-weight:500;
+  letter-spacing:2.5px;text-transform:uppercase;padding:15px 34px;
+  border:1.5px solid var(--ink);border-radius:1px;cursor:pointer;
+  transition:all .15s;
+}
+.btn-g:hover{background:var(--ink);color:var(--cream);}
+
+/* Scroll hint */
+.scroll-hint{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--border);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.scroll-bar{width:1px;height:36px;background:linear-gradient(to bottom,var(--border),transparent);}
+
+/* ── ABOUT ── */
+.about{
+  display:grid;grid-template-columns:480px 1fr;
+  background:var(--white);
+}
+.about-left{
+  padding:64px 0 64px 56px;
+  display:flex;align-items:flex-start;gap:20px;
+}
+/* Square photo frame — offset shadow */
+.photo-frame{
+  width:300px;height:300px;flex-shrink:0;
+  overflow:hidden;
+  outline:3px solid var(--border);
+  box-shadow:8px 8px 0 var(--ember);
+  border-radius:0;
+}
+.photo-frame img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:top center;display:block;
+}
+.photo-placeholder{
+  width:100%;height:100%;
+  background:linear-gradient(160deg,#D5CEC4 0%,#C0B8AC 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(0,0,0,0.3);
+  text-align:center;
+}
+/* Vertical socials beside photo */
+.v-socials{
+  display:flex;flex-direction:column;gap:10px;padding-top:4px;
+}
+.v-soc{
+  width:36px;height:36px;border-radius:50%;
+  border:1.5px solid var(--border);background:var(--cream);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:12px;text-decoration:none;
+  transition:all .2s;
+}
+.v-soc:hover{border-color:var(--teal);color:var(--teal);box-shadow:0 0 10px rgba(0,196,160,0.25);}
+/* Right content */
+.about-right{padding:64px 56px 64px 48px;}
+.about-badge{
+  display:inline-flex;align-items:center;
+  background:#FFF3EE;border:1px solid rgba(255,107,26,0.25);
+  padding:7px 16px;border-radius:1px;margin-bottom:24px;
+}
+.about-badge span{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--ember);}
+.about-h{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:52px;line-height:0.95;color:var(--ink);
+  margin-bottom:6px;letter-spacing:1px;
+}
+.about-h-italic{
+  font-family:'DM Serif Display',serif;
+  font-size:42px;line-height:1;
+  color:var(--teal);font-style:italic;
+  margin-bottom:28px;
+  text-shadow:0 0 20px rgba(0,196,160,0.2);
+}
+.about-p{font-size:14px;line-height:1.85;color:var(--muted);margin-bottom:14px;}
+.about-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.chip{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:6px 14px;border-radius:1px;}
+.chip-o{color:var(--ember);border-color:rgba(255,107,26,0.3);background:#FFF8F5;}
+.chip-t{color:var(--teal);border-color:rgba(0,196,160,0.3);background:#F0FBFA;}
+
+/* ── WHAT I DO ── */
+.pillars-wrap{background:var(--cream);border-top:1px solid var(--border);}
+.pillars-head{padding:56px 56px 0;display:flex;justify-content:space-between;align-items:baseline;}
+.pillars-head-right{font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--border);letter-spacing:2px;}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);}
+.pillar{padding:40px 44px;border-right:1px solid var(--border);}
+.pillar:last-child{border-right:none;}
+.p-num{
+  font-family:'Bebas Neue',sans-serif;font-size:64px;
+  color:transparent;-webkit-text-stroke:1px var(--border);
+  line-height:1;margin-bottom:12px;letter-spacing:2px;
+}
+.p-bar{width:36px;height:3px;border-radius:0;margin-bottom:20px;}
+.p-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--ink);margin-bottom:12px;}
+.p-body{font-size:13px;line-height:1.8;color:var(--muted);}
+
+/* ── EXPERIENCE TIMELINE ── */
+.timeline{padding:72px 56px;background:var(--white);}
+.tl-header{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:48px;
+}
+.tl-title{
+  font-family:'Bebas Neue',sans-serif;font-size:48px;
+  letter-spacing:2px;color:var(--ink);
+}
+.tl-title span{color:var(--ember);}
+.tl-item{
+  display:grid;grid-template-columns:180px 1px 1fr;
+  gap:0 32px;padding:32px 0;border-bottom:1px solid var(--surface);
+  align-items:start;
+}
+.tl-item:last-child{border-bottom:none;padding-bottom:0;}
+.tl-date{font-size:11px;color:#C0B8B0;letter-spacing:0.5px;text-align:right;padding-top:4px;line-height:1.6;}
+.tl-track{background:var(--border);align-self:stretch;position:relative;}
+.tl-track::before{
+  content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);
+  width:10px;height:10px;border-radius:50%;background:var(--ember);
+  box-shadow:0 0 10px rgba(255,107,26,0.5);
+  margin-left:-5px;
+}
+.tl-track.past::before{background:var(--border);box-shadow:none;}
+.tl-track.teal::before{background:var(--teal);box-shadow:0 0 10px rgba(0,196,160,0.4);}
+.tl-body{padding-top:2px;}
+.tl-role{
+  font-family:'Bebas Neue',sans-serif;font-size:22px;
+  letter-spacing:1.5px;color:var(--ink);margin-bottom:4px;
+}
+.tl-company{font-size:12px;color:var(--teal);margin-bottom:10px;font-weight:500;letter-spacing:0.5px;}
+.tl-company.ember{color:var(--ember);}
+.tl-desc{font-size:12px;line-height:1.8;color:var(--muted);}
+
+/* ── TEACHING / COMMUNITY IMPACT ── */
+.impact{padding:72px 56px;background:var(--surface);}
+.impact-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:48px;}
+.impact-title{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:2px;}
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.impact-card{background:var(--cream);padding:36px;position:relative;overflow:hidden;}
+.impact-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--ember);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s;
+}
+.impact-card:hover::after{transform:scaleX(1);}
+.ic-num{
+  font-family:'Bebas Neue',sans-serif;font-size:56px;
+  color:var(--ember);line-height:1;margin-bottom:8px;letter-spacing:2px;
+}
+.ic-num.teal{color:var(--teal);}
+.ic-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:block;}
+.ic-body{font-size:13px;line-height:1.7;color:var(--muted);}
+.ic-tag{
+  display:inline-block;margin-top:14px;font-size:9px;letter-spacing:2px;
+  text-transform:uppercase;border:1px solid var(--border);padding:4px 10px;color:var(--muted);
+  border-radius:1px;
+}
+
+/* ── CONTACT ── */
+.contact{
+  background:var(--ink);color:var(--cream);
+  padding:80px 56px;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+}
+.contact-left{}
+.contact-eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#555;margin-bottom:20px;display:block;}
+.contact-h{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:72px;line-height:0.9;letter-spacing:2px;
+  margin-bottom:24px;
+}
+.contact-h .outline{
+  display:block;color:transparent;
+  -webkit-text-stroke:1.5px rgba(255,255,255,0.3);letter-spacing:4px;
+}
+.contact-h .solid{display:block;color:var(--ember);}
+.contact-sub{font-size:13px;color:#666;line-height:1.8;max-width:320px;}
+.contact-right{display:flex;flex-direction:column;gap:20px;}
+.c-row{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid #1E1E1E;}
+.c-row:last-child{border-bottom:none;}
+.c-icon{
+  width:40px;height:40px;border-radius:50%;
+  border:1px solid #2A2A2A;background:#171717;
+  display:flex;align-items:center;justify-content:center;
+  color:#555;font-size:14px;flex-shrink:0;
+}
+.c-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:3px;}
+.c-val{font-size:13px;color:#AAA;}
+.c-val a{color:var(--teal);text-decoration:none;}
+
+/* ── FOOTER BAR ── */
+.footer-bar{
+  background:#0A0A0A;padding:20px 56px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid #1A1A1A;
+}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;color:#333;}
+.footer-logo span{color:var(--ember);}
+.footer-copy{font-size:10px;letter-spacing:1px;color:#333;text-transform:uppercase;}
+.footer-line{font-family:'JetBrains Mono',monospace;font-size:10px;color:#2A2A2A;letter-spacing:1px;}
+</style>
+</head>
+<body>
+
+<!-- ───────────── NAV ───────────── -->
+<nav>
+  <div class="logo">EBUKA<span>.</span></div>
+  <div class="nav-links">
+    <a href="#">Work</a>
+    <a href="#">Research</a>
+    <a href="#">Teaching</a>
+    <a href="#">Writing</a>
+  </div>
+  <a class="nav-cta" href="#">Get In Touch</a>
+</nav>
+
+<!-- ───────────── HERO ───────────── -->
+<section class="hero">
+  <!-- Workshop photo background (right side) -->
+  <div class="hero-bg-photo">
+    <div class="hero-photo-placeholder">
+      <div class="icon">📷</div>
+      <div class="text">NVIDIA Workshop<br>Photo Here</div>
+    </div>
+  </div>
+  <!-- Fade from cream to transparent -->
+  <div class="hero-photo-fade"></div>
+
+  <div class="hero-content">
+    <!-- Bordered teal brand pill -->
+    <div class="brand-pill">
+      Building reliable Software &amp; AI Systems &nbsp;·&nbsp; <em>Teaching Africa.</em>
+    </div>
+
+    <!-- Massive editorial type -->
+    <h1 class="hero-name">
+      <span class="name-outline">CHUKWUEBUKA</span>
+      <span class="name-solid">CHUKWUDI.</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="hero-subtitle">
+      Software Engineer &nbsp;—&nbsp; <strong>AI Systems Researcher</strong> &nbsp;—&nbsp; NVIDIA DLI Ambassador
+    </p>
+
+    <!-- Social icons horizontal -->
+    <div class="hero-socials">
+      <a href="#" class="h-soc teal" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" class="h-soc" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" class="h-soc teal" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+      <a href="#" class="h-soc" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+      <a href="#" class="h-soc teal" title="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <!-- CTAs -->
+    <div class="hero-actions">
+      <button class="btn-p">View My Work</button>
+      <button class="btn-g">Read Research →</button>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-bar"></div>
+    Scroll
+  </div>
+</section>
+
+<hr>
+
+<!-- ───────────── ABOUT ───────────── -->
+<section class="about">
+  <div class="about-left">
+    <div class="photo-frame">
+      <div class="photo-placeholder">Headshot<br>Photo Here</div>
+    </div>
+    <div class="v-socials">
+      <a href="#" class="v-soc" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" class="v-soc" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" class="v-soc" title="Scholar"><i class="fas fa-graduation-cap"></i></a>
+      <a href="#" class="v-soc" title="X"><i class="fab fa-x-twitter"></i></a>
+      <a href="#" class="v-soc" title="Web"><i class="fas fa-globe"></i></a>
+      <a href="#" class="v-soc" title="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+  <div class="about-right">
+    <span class="lbl" style="margin-bottom:20px;">About Me</span>
+    <div class="about-badge"><span>Chukwuebuka Chukwudi</span></div>
+    <div class="about-h">I BUILD AI SYSTEMS</div>
+    <div class="about-h-italic">that actually work.</div>
+    <p class="about-p">Started with a Mathematics degree from the University of Nigeria, ended up building production AI agents, RAG pipelines, and fintech backends used by real people. I'm drawn to the gap between research ideas and working systems — and I've made it my job to close it.</p>
+    <p class="about-p">Beyond the code, I teach. As an NVIDIA DLI certified instructor, I've delivered hands-on AI workshops across 5+ Nigerian universities and led a Pan-African RAG bootcamp with over 1,300 participants from across Africa.</p>
+    <div class="about-chips">
+      <span class="chip chip-o">NVIDIA DLI Certified</span>
+      <span class="chip chip-t">BSc Mathematics · UNN</span>
+      <span class="chip">Lagos, Nigeria</span>
+      <span class="chip">Open to Collaboration</span>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ───────────── WHAT I DO ───────────── -->
+<div class="pillars-wrap">
+  <div class="pillars-head">
+    <span class="lbl">What I Do</span>
+    <span class="pillars-head-right">BUILD · RESEARCH · TEACH</span>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="p-num">01</div>
+      <div class="p-bar" style="background:var(--ember);"></div>
+      <div class="p-title">Build</div>
+      <div class="p-body">AI agents, RAG pipelines, fintech backends, and real-time full-stack products — built to run in production and survive contact with real users.</div>
+    </div>
+    <div class="pillar">
+      <div class="p-num">02</div>
+      <div class="p-bar" style="background:var(--teal);"></div>
+      <div class="p-title">Research</div>
+      <div class="p-body">Agent evaluation, action boundaries in agentic systems, and AI that behaves reliably — not just benchmarks well on paper.</div>
+    </div>
+    <div class="pillar">
+      <div class="p-num">03</div>
+      <div class="p-bar" style="background:var(--gold);"></div>
+      <div class="p-title">Teach</div>
+      <div class="p-body">NVIDIA DLI certified instructor. Led RAG bootcamps across Africa with 1,300+ participants. Teaching is the other form of building.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ───────────── EXPERIENCE ───────────── -->
+<section class="timeline">
+  <div class="tl-header">
+    <div class="tl-title">EXPERIENCE<span>.</span></div>
+    <span class="lbl">Selected Work History</span>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-date">Apr 2026<br>Present</div>
+    <div class="tl-track"></div>
+    <div class="tl-body">
+      <div class="tl-role">AI Engineer Intern</div>
+      <div class="tl-company ember">JeGo Technologies</div>
+      <div class="tl-desc">Building Ovo, an AI booking agent powered by the Anthropic API. Developing backend AI orchestration and agent logic in Python for intelligent booking workflows across consumer app and command portal.</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-date">Jan 2026<br>Present</div>
+    <div class="tl-track"></div>
+    <div class="tl-body">
+      <div class="tl-role">Software Engineer</div>
+      <div class="tl-company ember">OPay</div>
+      <div class="tl-desc">Built automated API integration validator reducing manual verification by ~90%. Engineered betting platform integrations and a WordPress payment gateway plugin for merchant onboarding.</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-date">Jul 2025<br>Dec 2025</div>
+    <div class="tl-track teal"></div>
+    <div class="tl-body">
+      <div class="tl-role">Fullstack Developer</div>
+      <div class="tl-company">MocX</div>
+      <div class="tl-desc">Built real-time EV tricycle tracking maps. Implemented asset recovery features that directly facilitated recovery of stolen company assets. React JS, Nest JS, QuestDB.</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-date">Sep 2024<br>Jul 2025</div>
+    <div class="tl-track past"></div>
+    <div class="tl-body">
+      <div class="tl-role">Software Engineer</div>
+      <div class="tl-company">HorusLabs — Rwanda (Remote)</div>
+      <div class="tl-desc">Responsive web UI with ReactJS & MUI for client dashboards. REST APIs with .NET.</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-date">Aug 2022<br>Jan 2024</div>
+    <div class="tl-track past"></div>
+    <div class="tl-body">
+      <div class="tl-role">Frontend Web Developer</div>
+      <div class="tl-company">LIVEIZY LTD</div>
+      <div class="tl-desc">Led customer and admin portals. Grew rent value on platform by 325%, exceeding ₦850M. Integrated VFD Microfinance APIs for rent loans and repayments via webhooks.</div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ───────────── TEACHING & IMPACT ───────────── -->
+<section class="impact">
+  <div class="impact-header">
+    <div class="impact-title">TEACHING &amp; IMPACT<span style="color:var(--ember);">.</span></div>
+    <span class="lbl">Community Building · Education · NVIDIA DLI</span>
+  </div>
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="ic-num">500+</div>
+      <span class="ic-label">Workshop Students</span>
+      <div class="ic-body">Delivered NVIDIA DLI RAG-Agents hands-on workshops at 5+ universities across Nigeria as a certified DLI Ambassador & Instructor.</div>
+      <span class="ic-tag">NVIDIA DLI · 2025</span>
+    </div>
+    <div class="impact-card">
+      <div class="ic-num teal">1,300+</div>
+      <span class="ic-label">Bootcamp Participants</span>
+      <div class="ic-body">Led a 6-week Pan-African RAG Agents Bootcamp. Developed the full curriculum, learning content, and assessments from scratch.</div>
+      <span class="ic-tag">NSK.AI · Pan-Africa</span>
+    </div>
+    <div class="impact-card">
+      <div class="ic-num">900%</div>
+      <span class="ic-label">Community Growth</span>
+      <div class="ic-body">Grew NSK.AI community from ~100 to 1,000+ members. Secured partnerships and mentoring to support developer growth across Africa.</div>
+      <span class="ic-tag">NSK.AI · Lead</span>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ───────────── CONTACT ───────────── -->
+<section class="contact">
+  <div class="contact-left">
+    <span class="contact-eyebrow">Let's Connect</span>
+    <div class="contact-h">
+      <span class="outline">LET'S</span>
+      <span class="solid">BUILD.</span>
+    </div>
+    <p class="contact-sub">Whether it's a project, a research collaboration, a workshop invitation, or a conversation about AI systems — I'm reachable.</p>
+  </div>
+  <div class="contact-right">
+    <div class="c-row">
+      <div class="c-icon"><i class="fas fa-envelope"></i></div>
+      <div><div class="c-label">Email</div><div class="c-val"><a href="mailto:ebukachuqz@gmail.com">ebukachuqz@gmail.com</a></div></div>
+    </div>
+    <div class="c-row">
+      <div class="c-icon"><i class="fab fa-github"></i></div>
+      <div><div class="c-label">GitHub</div><div class="c-val">github.com / ebuka</div></div>
+    </div>
+    <div class="c-row">
+      <div class="c-icon"><i class="fab fa-linkedin-in"></i></div>
+      <div><div class="c-label">LinkedIn</div><div class="c-val">chukwuebuka-chukwudi</div></div>
+    </div>
+    <div class="c-row">
+      <div class="c-icon"><i class="fas fa-graduation-cap"></i></div>
+      <div><div class="c-label">Google Scholar</div><div class="c-val"><a href="#">Scholar Profile →</a></div></div>
+    </div>
+    <div class="c-row">
+      <div class="c-icon"><i class="fas fa-map-marker-alt"></i></div>
+      <div><div class="c-label">Location</div><div class="c-val">Lagos, Nigeria</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── FOOTER ───────────── -->
+<div class="footer-bar">
+  <div class="footer-logo">EBUKA<span>.</span></div>
+  <div class="footer-copy">© 2026 Chukwuebuka Chukwudi</div>
+  <div class="footer-line">// BUILT WITH INTENTION</div>
+</div>
+
+</body>
+</html>
